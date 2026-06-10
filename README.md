@@ -5,30 +5,31 @@
 [![Crates.io Version](https://img.shields.io/crates/v/midnight-circuits?label=midnight-circuits)](https://crates.io/crates/midnight-circuits)
 [![Crates.io Version](https://img.shields.io/crates/v/midnight-zk-stdlib?label=midnight-zk-stdlib)](https://crates.io/crates/midnight-zk-stdlib)
 
-This repository implements the proof system used in **Midnight**, along with tooling for building zero-knowledge circuits.
+Welcome to the core repository for **Midnight's** proof system. This repository houses the foundational cryptographic implementations and the comprehensive tooling required to design, construct, and manage zero-knowledge circuits for the Midnight network.
 
-## Repository Structure
+## Project Architecture
 
-- `curves`: Implementation of elliptic curves used in Midnight, concretely BLS12-381 and JubJub.
-- `proofs`: Plonk proof system using KZG commitments.
-- `circuits`: Tooling for constructing ZK circuits.
-- `aggregator`: Toolkit for proof aggregation of midnight-proofs.
-- `zk_stdlib`: A high-level abstraction for building zero-knowledge circuits using `proofs` and `circuits`.
+The codebase is modularized into several key components to facilitate the ZK workflow:
 
-## Acknowledgments
+- `curves`: Provides the essential elliptic curve cryptography, specifically featuring implementations for BLS12-381 and JubJub curves.
+- `proofs`: Houses our Plonk proof system, which utilizes KZG commitments under the hood.
+- `circuits`: A dedicated suite of tools and primitives for constructing zero-knowledge circuits.
+- `aggregator`: Specialized utilities designed for aggregating `midnight-proofs`.
+- `zk_stdlib`: A user-friendly, high-level standard library that streamlines the creation of ZK circuits by effectively abstracting the underlying `proofs` and `circuits` modules.
 
-This project was originally built upon the foundations of several outstanding open-source libraries:
+## Credits & Acknowledgments
 
-- [`blstrs`](https://github.com/filecoin-project/blstrs) – by the Filecoin Project
-- [`jubjub`](https://github.com/zcash/jubjub) – by the Zcash Project
-- [`halo2curves`](https://github.com/privacy-scaling-explorations/halo2curves) v0.8.0 – by the Privacy Scaling Explorations (PSE) team
-- [`halo2`](https://github.com/privacy-scaling-explorations/halo2) v0.3.0 – by the Privacy Scaling Explorations (PSE) team, itself originally derived from the [Zcash Sapling proving system](https://github.com/zcash/halo2)
+The development of Midnight ZK is deeply rooted in the stellar work of the broader open-source cryptography community. We would like to extend our sincere gratitude to the creators and maintainers of the following outstanding projects:
 
-We initially maintained the following components as forks:
+- [`blstrs`](https://github.com/filecoin-project/blstrs) – Developed by the Filecoin Project
+- [`jubjub`](https://github.com/zcash/jubjub) – Developed by the Zcash Project
+- [`halo2curves`](https://github.com/privacy-scaling-explorations/halo2curves) (v0.8.0) – Developed by the Privacy Scaling Explorations (PSE) team
+- [`halo2`](https://github.com/privacy-scaling-explorations/halo2) (v0.3.0) – Developed by the PSE team, which itself was originally adapted from the [Zcash Sapling proving system](https://github.com/zcash/halo2)
 
-- `bls12_381` and its embedded `jubjub` implementation originated as forks of `blstrs` and `jubjub`, respectively.
-- `proofs` began as a fork of `halo2` v0.3.0.
+**Evolution of our codebase:**
 
-Over time, our codebases have diverged from the upstream projects. These components are no longer maintained as forks and have evolved into standalone implementations tailored to Midnight's needs.
+In the early stages of this project, several of our components were maintained as direct forks:
+- The `bls12_381` module (and its integrated `jubjub` implementation) began as forks of `blstrs` and `jubjub`.
+- The `proofs` module was originally a fork of `halo2` (v0.3.0).
 
-We gratefully acknowledge the authors and maintainers of the original projects.
+As Midnight has grown, our specific technical requirements have naturally led our codebase to diverge significantly from these upstream sources. Consequently, these components have matured into fully independent, specialized implementations rather than maintained forks. We remain incredibly thankful for the robust foundations these original projects provided.
