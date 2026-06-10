@@ -1,35 +1,67 @@
-# Midnight ZK
+<div align="center">
 
-[![Crates.io Version](https://img.shields.io/crates/v/midnight-proofs?label=midnight-proofs)](https://crates.io/crates/midnight-proofs)
-[![Crates.io Version](https://img.shields.io/crates/v/midnight-curves?label=midnight-curves)](https://crates.io/crates/midnight-curves)
-[![Crates.io Version](https://img.shields.io/crates/v/midnight-circuits?label=midnight-circuits)](https://crates.io/crates/midnight-circuits)
-[![Crates.io Version](https://img.shields.io/crates/v/midnight-zk-stdlib?label=midnight-zk-stdlib)](https://crates.io/crates/midnight-zk-stdlib)
+# Midnight ZK-Proofs Core
 
-Welcome to the core repository for **Midnight's** proof system. This repository houses the foundational cryptographic implementations and the comprehensive tooling required to design, construct, and manage zero-knowledge circuits for the Midnight network.
+**The foundational zero-knowledge proof system powering the Midnight Network**
 
-## Project Architecture
+[![Midnight Proofs](https://img.shields.io/crates/v/midnight-proofs?label=midnight-proofs&style=flat-square)](https://crates.io/crates/midnight-proofs)
+[![Midnight Curves](https://img.shields.io/crates/v/midnight-curves?label=midnight-curves&style=flat-square)](https://crates.io/crates/midnight-curves)
+[![Midnight Circuits](https://img.shields.io/crates/v/midnight-circuits?label=midnight-circuits&style=flat-square)](https://crates.io/crates/midnight-circuits)
+[![Midnight ZK Stdlib](https://img.shields.io/crates/v/midnight-zk-stdlib?label=midnight-zk-stdlib&style=flat-square)](https://crates.io/crates/midnight-zk-stdlib)
 
-The codebase is modularized into several key components to facilitate the ZK workflow:
+<p align="center">
+  <i>Robust Cryptography • Scalable Proofs • Developer-Friendly Circuit Tooling</i>
+</p>
 
-- `curves`: Provides the essential elliptic curve cryptography, specifically featuring implementations for BLS12-381 and JubJub curves.
-- `proofs`: Houses our Plonk proof system, which utilizes KZG commitments under the hood.
-- `circuits`: A dedicated suite of tools and primitives for constructing zero-knowledge circuits.
-- `aggregator`: Specialized utilities designed for aggregating `midnight-proofs`.
-- `zk_stdlib`: A user-friendly, high-level standard library that streamlines the creation of ZK circuits by effectively abstracting the underlying `proofs` and `circuits` modules.
+</div>
 
-## Credits & Acknowledgments
+---
 
-The development of Midnight ZK is deeply rooted in the stellar work of the broader open-source cryptography community. We would like to extend our sincere gratitude to the creators and maintainers of the following outstanding projects:
+## About This Repository
 
-- [`blstrs`](https://github.com/filecoin-project/blstrs) – Developed by the Filecoin Project
-- [`jubjub`](https://github.com/zcash/jubjub) – Developed by the Zcash Project
-- [`halo2curves`](https://github.com/privacy-scaling-explorations/halo2curves) (v0.8.0) – Developed by the Privacy Scaling Explorations (PSE) team
-- [`halo2`](https://github.com/privacy-scaling-explorations/halo2) (v0.3.0) – Developed by the PSE team, which itself was originally adapted from the [Zcash Sapling proving system](https://github.com/zcash/halo2)
+Welcome to the official repository for the **Midnight ZK** ecosystem. This monorepo is the heart of Midnight's privacy-preserving technology. It encapsulates a highly optimized, production-ready implementation of our zero-knowledge proof system, alongside a comprehensive suite of tools designed to make building, verifying, and aggregating ZK circuits as seamless as possible.
 
-**Evolution of our codebase:**
+Whether you are a protocol core developer, a cryptography researcher, or an engineer building decentralized applications on Midnight, this repository provides the critical primitives required to unlock the full potential of programmable data protection.
 
-In the early stages of this project, several of our components were maintained as direct forks:
-- The `bls12_381` module (and its integrated `jubjub` implementation) began as forks of `blstrs` and `jubjub`.
-- The `proofs` module was originally a fork of `halo2` (v0.3.0).
+---
 
-As Midnight has grown, our specific technical requirements have naturally led our codebase to diverge significantly from these upstream sources. Consequently, these components have matured into fully independent, specialized implementations rather than maintained forks. We remain incredibly thankful for the robust foundations these original projects provided.
+## Architectural Overview
+
+To ensure maximum maintainability, security, and modularity, the Midnight ZK stack is meticulously divided into several specialized crates. Each component serves a distinct and vital purpose in the lifecycle of a zero-knowledge proof:
+
+### 1. `curves` — *The Cryptographic Foundation*
+Elliptic curve cryptography is the absolute bedrock of modern ZK systems. This crate provides highly optimized, secure implementations of the specific mathematical curves utilized by the Midnight network:
+* **BLS12-381**: A pairing-friendly curve that is essential for our polynomial commitment schemes.
+* **JubJub**: A twisted Edwards curve built over the BLS12-381 scalar field, carefully chosen for efficient inside-circuit operations and cryptography.
+
+### 2. `proofs` — *The Proving Engine*
+This is the core mathematical engine of the repository. It implements a highly refined version of the **Plonk** proof system. To achieve optimal performance, succinctness, and fast verification times, this implementation is paired with **KZG (Kate-Zaverucha-Goldberg) polynomial commitments**. It handles the heavy lifting of generating and verifying the cryptographic proofs that guarantee both privacy and computational correctness.
+
+### 3. `circuits` — *The Developer Toolkit*
+Building custom ZK circuits from scratch can be notoriously complex. The `circuits` crate provides the low-level APIs, necessary abstractions, and specialized tooling required to construct robust and efficient zero-knowledge circuits. It acts as the crucial bridge connecting raw cryptographic mathematics with programmable logic.
+
+### 4. `aggregator` — *Scaling Through Composition*
+On-chain proof verification can become a bottleneck at scale. The `aggregator` toolkit solves this challenge by enabling the recursive aggregation of multiple individual `midnight-proofs` into a single, succinct master proof. This is a critical infrastructure component for achieving high transaction throughput and scalability across the Midnight ecosystem.
+
+### 5. `zk_stdlib` — *The Standard Library*
+Designed specifically with the end-user in mind, `zk_stdlib` provides a high-level abstraction layer. It wraps the deep complexities of both the `proofs` and `circuits` crates into an intuitive, developer-friendly standard library. If you are building applications that require zero-knowledge capabilities, this will be your primary entry point.
+
+---
+
+## Heritage & Acknowledgments
+
+Midnight ZK does not exist in a vacuum—we stand on the shoulders of giants. The development of our proof system was profoundly inspired by, and originally bootstrapped from, several pioneering open-source projects in the applied cryptography space. 
+
+We extend our deepest gratitude and respect to the brilliant teams, researchers, and open-source contributors behind the following libraries:
+
+* **[`blstrs`](https://github.com/filecoin-project/blstrs)** – Crafted by the **Filecoin Project**.
+* **[`jubjub`](https://github.com/zcash/jubjub)** – Pioneered by the **Zcash Project**.
+* **[`halo2curves` (v0.8.0)](https://github.com/privacy-scaling-explorations/halo2curves)** & **[`halo2` (v0.3.0)](https://github.com/privacy-scaling-explorations/halo2)** – Developed by the **Privacy Scaling Explorations (PSE)** team (with `halo2` originally deriving its roots from the groundbreaking work on the [Zcash Sapling proving system](https://github.com/zcash/halo2)).
+
+### The Evolution of Midnight ZK: From Forks to Native Implementations
+
+In the project's infancy, pragmatic engineering dictated that we leverage existing, battle-tested codebases. Our initial `bls12_381` and `jubjub` modules started out as direct forks of the `blstrs` and `jubjub` repositories. Similarly, our core `proofs` engine began its life as a fork of PSE's `halo2` v0.3.0.
+
+However, over months of relentless development, rigorous optimization, and alignment with Midnight's unique architectural and security requirements, our codebase has undergone a radical transformation. We have introduced bespoke features, custom performance optimizations, and Midnight-specific logic that now deeply separate our code from its upstream origins. 
+
+Today, these components are **no longer maintained as forks**. They have matured into standalone, native implementations uniquely tailored for Midnight. While our development paths have diverged, the robust foundations laid by these original projects remain an indelible part of our history, and we remain continually thankful for the open-source ethos that made this possible.
